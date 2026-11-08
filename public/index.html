@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidyakul Classes</title>
+    <link rel="stylesheet" href="css/radha-app.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <!-- CryptoJS for encryption/decryption -->
+    <script src="js/crypto-js.min.js"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <h1 class="logo" onclick="showBatches()">
+                        <i class="fas fa-graduation-cap"></i> Vidyakul Classes
+                    </h1>
+                    <div class="header-actions">
+                        <button class="btn-add-batch" onclick="openAddBatchModal()" title="Add Batches">
+                            <i class="fas fa-plus"></i>
+                            <span class="btn-text">Add Batch</span>
+                        </button>
+                        <button class="theme-toggle" onclick="toggleTheme()">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb" id="breadcrumb"></div>
+
+                <!-- Content Area -->
+                <div id="content"></div>
+            </div>
+        </main>
+<!-- ===== Simple Clean Community Popup ===== -->
+
+<style>
+#srOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(4px);
+
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999999;
+  padding:20px;
+  transition:opacity .18s ease;
+}
+
+#srPopup{
+  width:100%;
+  max-width:400px;
+  background:#fff;
+  border-radius:24px;
+  padding:32px 24px 24px;
+  text-align:center;
+  position:relative;
+  box-shadow:0 15px 50px rgba(0,0,0,.18);
+  animation:popupShow .25s ease;
+  font-family:Arial,sans-serif;
+}
+
+#srClose{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#f3f4f6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size:18px;
+  color:#111;
+  transition:.2s ease;
+}
+
+#srClose:hover{
+  background:#e5e7eb;
+  transform:scale(1.08);
+}
+
+#srIcon{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#229ED9,#25D366);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 18px;
+  font-size:36px;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+#srTitle{
+  font-size:28px;
+  font-weight:700;
+  color:#111;
+  margin-bottom:12px;
+  line-height:1.3;
+}
+
+#srSub{
+  font-size:15px;
+  color:#666;
+  line-height:1.7;
+  margin-bottom:24px;
+}
+
+.srBtn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:54px;
+  border-radius:14px;
+  color:#fff;
+  text-decoration:none;
+  font-size:16px;
+  font-weight:600;
+  transition:.2s ease;
+}
+
+.srBtn:hover{
+  opacity:.92;
+  transform:translateY(-1px);
+}
+
+.srTelegram{
+  background:#229ED9;
+}
+
+.srWhatsapp{
+  background:#25D366;
+}
+
+.srBtn svg{
+  margin-right:10px;
+  flex-shrink:0;
+}
+
+#srBtns{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+@keyframes popupShow{
+  from{
+    opacity:0;
+    transform:translateY(20px) scale(.95);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+@media(max-width:480px){
+  #srPopup{
+    padding:28px 18px 20px;
+  }
+
+  #srTitle{
+    font-size:24px;
+  }
+}
+</style>
+
+<div id="srOverlay">
+  <div id="srPopup">
+
+    <div id="srClose">✕</div>
+
+    <div id="srIcon">🚀</div>
+
+    <div id="srTitle">
+      Join Our Community
+    </div>
+
+    <div id="srSub">
+      Stay updated with latest materials,<br>
+      notes, PDFs and important notifications.
+    </div>
+
+    <div id="srBtns">
+
+      <!-- Telegram -->
+      <a href="https://telegram.me/+DS3-I_v2-6UzN2I1"
+         target="_blank"
+         class="srBtn srTelegram">
+
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="22"
+             height="22"
+             fill="currentColor"
+             viewBox="0 0 24 24">
+          <path d="M21.5 2.5L2.9 9.7c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.1.8.8.8.5 0 .7-.2 1-.5l2.3-2.2 4.7 3.5c.9.5 1.5.3 1.7-.8L23 4c.3-1.4-.5-2-1.5-1.5z"/>
+        </svg>
+
+        Join Telegram
+      </a>
+
+      <!-- WhatsApp -->
+      <a href="https://whatsapp.com/channel/0029VaLk0BK17En2Kcjwcc2r"
+         target="_blank"
+         class="srBtn srWhatsapp">
+
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="22"
+             height="22"
+             fill="currentColor"
+             viewBox="0 0 24 24">
+          <path d="M20.5 3.5A11 11 0 0 0 3.6 17.2L2 22l4.9-1.5A11 11 0 1 0 20.5 3.5zm-8.6 16.1c-1.8 0-3.5-.5-5-1.4l-.4-.2-2.9.9.9-2.8-.3-.4a8.3 8.3 0 1 1 7.7 3.9zm4.6-6.2c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2s-.8.9-1 .9c-.2 0-.5 0-.8-.3-.3-.2-1.3-.5-2.5-1.7-.9-.8-1.5-1.9-1.7-2.2-.2-.3 0-.5.2-.7.2-.2.3-.4.5-.6.2-.2.2-.4.3-.6.1-.2 0-.4 0-.5s-.7-1.7-.9-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.9 4.4 4 .6.3 1.1.5 1.5.6.6.2 1.2.2 1.7.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.1-1.4-.1-.1-.3-.2-.6-.4z"/>
+        </svg>
+
+        Join WhatsApp Channel
+      </a>
+
+    </div>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+(function(){
+
+  const overlay = document.getElementById("srOverlay");
+  const closeBtn = document.getElementById("srClose");
+
+  requestAnimationFrame(() => {
+    overlay.style.opacity = "1";
+    overlay.style.visibility = "visible";
+    overlay.style.pointerEvents = "auto";
+  });
+
+  function hidePopup(){
+    overlay.style.opacity = "0";
+    overlay.style.visibility = "hidden";
+    overlay.style.pointerEvents = "none";
+  }
+
+  closeBtn.addEventListener("click", hidePopup);
+
+  overlay.addEventListener("click", function(e){
+    if(e.target === overlay){
+      hidePopup();
+    }
+  });
+
+})();
+</script>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2025-2026 Vidyakul. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/radha-radha-radha-radha-radha-app.js"></script>
+</body>
+</html>
